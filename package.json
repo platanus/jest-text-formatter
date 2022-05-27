@@ -1,0 +1,34 @@
+{
+  "name": "jest-text-formatter",
+  "version": "1.0.0",
+  "description": "Package to convert Jest coverage output files to a format readable by Reviewdog",
+  "main": "src/jest-text-formatter.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [
+    "jest",
+    "reviewdog",
+    "coverage"
+  ],
+  "author": {
+    "name": "Platanus",
+    "url": "https://platan.us"
+  },
+  "contributors": [
+    {
+      "name": "Florencia Valdés"
+    }
+  ],
+  "license": "MIT",
+  "bin": {
+    "format-coverage": "cli.js"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "eslint": "^8.15.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jest": "^26.1.5",
+    "jest": "^28.1.0"
+  }
+}
