@@ -1,11 +1,12 @@
 const { processLine } = require('./jest-text-formatter');
-const fs = require("fs");
+const fs = require('fs');
 
 jest.mock('fs');
 
 describe('process line', () => {
   const currentPath = 'current/path';
   const outputPath = 'output.txt';
+  const rootPath = '/app/javascript';
 
   it('does not format invalid line', () => {
     expect(processLine('Invalid line --', currentPath, outputPath)).toBe(currentPath);
@@ -18,13 +19,13 @@ describe('process line', () => {
 
   it('correctly formats file line with coverage lines', async () => {
     const filePathCoverage = '  file.js |       0 |        0 |       0 |       0 | 11-69,78';
-    processLine(filePathCoverage, currentPath, outputPath);
-    expect(fs.writeFileSync).toHaveBeenCalledTimes(2);
+    processLine(filePathCoverage, currentPath, outputPath, rootPath);
+    expect(fs.writeFileSync).toHaveBeenCalledTimes(2); // eslint-disable-line no-magic-numbers
     expect(fs.writeFileSync).toHaveBeenNthCalledWith(
-      1, outputPath, '/current/path/file.js:11:1: Not covered lines: 11 to 69\n', { flag: 'a' }
+      1, outputPath, '/app/javascript/current/path/file.js:11:1: Not covered lines: 11 to 69\n', { flag: 'a' },
     );
     expect(fs.writeFileSync).toHaveBeenNthCalledWith(
-      2, outputPath, '/current/path/file.js:78:1: Not covered lines: 78\n', { flag: 'a' }
+      2, outputPath, '/app/javascript/current/path/file.js:78:1: Not covered lines: 78\n', { flag: 'a' },
     );
   });
 

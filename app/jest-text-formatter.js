@@ -20,30 +20,30 @@ function getPath(line) {
   return path;
 }
 
-function processFileLine(line, currentPath, outputPath) {
+function processFileLine(line, currentPath, outputPath, rootPath) {
   const ranges = line.split('|').slice(-1)[0].trim().split(',');
   const filePath = `${currentPath}/${line.trim().split('|').slice(0)[0]}`;
   ranges.forEach((range) => {
     const [from, to] = range.split('-');
     const msg = to ? `${from} to ${to}` : from;
-    const outputLine = `/${filePath.trim()}:${from}:1: Not covered lines: ${msg}\n`;
+    const outputLine = `${rootPath}/${filePath.trim()}:${from}:1: Not covered lines: ${msg}\n`;
     fs.writeFileSync(outputPath, outputLine, { flag: 'a' });
   });
 }
 
-function processLine(line, currentPath, outputPath) {
+function processLine(line, currentPath, outputPath, rootPath) {
   if (isDirectory(line)) {
     return getPath(line);
   }
 
   if (isFile(line) && !coveredIsEmpty(line)) {
-    processFileLine(line, currentPath, outputPath);
+    processFileLine(line, currentPath, outputPath, rootPath);
   }
 
   return currentPath;
 }
 
-function processFile(processFilePath, outputPath) {
+function processFile(processFilePath, outputPath, rootPath) {
   const readInterface = readline.createInterface({
     input: fs.createReadStream(processFilePath),
   });
@@ -51,7 +51,7 @@ function processFile(processFilePath, outputPath) {
   let currentPath = '';
 
   readInterface.on('line', (line) => {
-    currentPath = processLine(line, currentPath, outputPath);
+    currentPath = processLine(line, currentPath, outputPath, rootPath);
   });
 }
 

@@ -23,7 +23,7 @@ yarn test > coverage.txt
 Then run Jest Coverage Formatter
 
 ```
-format-coverage ./coverage.txt ./outputPath/coverage.txt
+format-coverage ./coverage.txt ./outputPath/coverage.txt /root/path
 ```
 
 It will save the output to ```./outputPath/coverage.txt```
