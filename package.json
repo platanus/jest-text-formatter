@@ -1,6 +1,6 @@
 {
   "name": "jest-text-formatter",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Package to convert Jest coverage output files to a format readable by Reviewdog",
   "main": "src/jest-text-formatter.js",
   "scripts": {

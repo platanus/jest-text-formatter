@@ -14,8 +14,7 @@ function coveredIsEmpty(line) {
 }
 
 function getPath(line) {
-  const path = line.split('|').slice(0)[0].trim().split('/').slice(1)
-    .join('/');
+  const path = line.split('|').slice(0)[0].trim();
 
   return path;
 }
